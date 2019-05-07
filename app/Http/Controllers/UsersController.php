@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\User;
 
+
 class UsersController extends Controller
 {
     //
@@ -14,7 +15,7 @@ class UsersController extends Controller
 		return view('users.show',compact('user'));
 	}
 	public function store (Request $request){
-		$this->verifyField($request->all(),[
+		$this->validate($request,[
 			'name' => 'required|string',
 			'email' => 'required|email|unique:users|max:255',
 			'password' => 'required|confirmed|min:6'
