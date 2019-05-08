@@ -13,18 +13,15 @@ class CreateManageTable extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+		Schema::create('users', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('username',20);
-			$table->string('password')->notNull();
-			$table->enum('gender',[1,2,3])->notNull()->default('1');
-			$table->string('mobile',11);
-			$table->string('email',50);
-			$table->tinyInteger('role_id');
-			$table->timestamps();
+			$table->string('name');
+			$table->string('email')->unique();
+			$table->timestamp('email_verified_at')->nullable();
+			$table->string('password');
 			$table->rememberToken();
-			$table->enum('status',[1,2])->notNull()->default('2');
-        });
+			$table->timestamps();
+		});
     }
 
     /**
@@ -34,6 +31,6 @@ class CreateManageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('users');
     }
 }
